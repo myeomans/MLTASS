@@ -1,6 +1,6 @@
 # The documentation of this function is standard in R... For the package "roxygen2"
 # If you put this in a package, the formatting will be automatically converted to a help file
-# That way you can see this documentation simply by typing ?TMEF_dfm at any time
+# That way you can see this documentation simply by typing ?MLTASS_dfm at any time
 
 #' A simple dfm function for text mining
 #' @description Builds a document feature matrix from a corpus of documents
