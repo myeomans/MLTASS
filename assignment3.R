@@ -34,9 +34,9 @@ rev_med_train<-rev_med[train_split,]
 rev_med_test<-rev_med[-train_split,]
 
 
-rev_med_dfm_train<-TMEF_dfm(rev_med_train$text,ngrams=1)
+rev_med_dfm_train<-MLTASS_dfm(rev_med_train$text,ngrams=1)
 
-rev_med_dfm_test<-TMEF_dfm(rev_med_test$text,
+rev_med_dfm_test<-MLTASS_dfm(rev_med_test$text,
                            ngrams=1,
                            min.prop=0) %>%
   dfm_match(colnames(rev_med_dfm_train))
@@ -470,14 +470,14 @@ plot(topicCorr(rev_topicMod20),
      vlabels=topicNames,
      vertex.size=20)
 
-stmEffects<-estimateEffect(1:topicNum~stars,
+sMLTASSfects<-estimateEffect(1:topicNum~stars,
                            rev_topicMod20,
                            meta= rev_med_train %>%
                              select(stars))
 
 
 # The default plotting function is bad... Here's another version
-bind_rows(lapply(summary(stmEffects)$tables,function(x) x[2,1:2])) %>%
+bind_rows(lapply(summary(sMLTASSfects)$tables,function(x) x[2,1:2])) %>%
   mutate(topic=factor(topicNames,ordered=T,
                       levels=topicNames),
          se_u=Estimate+`Std. Error`,
