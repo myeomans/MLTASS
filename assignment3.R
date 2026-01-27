@@ -1,6 +1,6 @@
 ################################################
 #
-#     Text Mining for Economics and Finance
+# Machine Learning & Text Analysis for Social Science
 #
 #               Assignment 3
 #
@@ -24,7 +24,7 @@ source("MLTASS_dfm.R")
 source("kendall_acc.R")
 
 # Review data
-rev_med<-readRDS("rev_med.RDS")
+rev_med<-readRDS("data/rev_med.RDS")
 
 # Train model
 
