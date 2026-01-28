@@ -1,11 +1,11 @@
-################################################
+########################################################
 #
 # Machine Learning & Text Analysis for Social Science
 #
 #               Assignment 3
 #
 #
-################################################
+########################################################
 
 # new packages this week
 #install.packages("sentimentr") # for sentiment
