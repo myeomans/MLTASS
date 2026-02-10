@@ -2,7 +2,7 @@
 #
 # Machine Learning & Text Analysis for Social Science
 #
-#              Assignment 6
+#              Assignment 5
 #
 #
 ################################################
