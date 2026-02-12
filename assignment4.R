@@ -263,7 +263,12 @@ data.frame(sport=dox,gender=gender_proj,
   geom_text() +
   theme_bw() +
   labs(x="Gender   (masculine +)",
+<<<<<<< HEAD
+       y="Class   (rich +)") +
+  ggtitle("unnormed")
+=======
        y="Class   (rich +)")
+>>>>>>> 5cc40d7463e71194310e083c7eeeee484b2e7d24
 
 
 rev_med_test$class_proj<-semaxis(class_pairs,rev_med_test$text,vecSmall)

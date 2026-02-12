@@ -118,8 +118,8 @@ head(QApairs)
 
 revs<-read.csv("data/week1_answers.csv")
 
-
-gemini.R::setAPI("AIzaSyA1kcHjek4VXVDJQy_SSE2NZQkG-6rahOc")
+#source("geminiAPI.R")
+gemini.R::setAPI(gKey)
 
 revs$stars_guess<-NA
 revs$price_guess<-NA
@@ -177,5 +177,3 @@ revs %>%
 
 revs %>%
   with(table(stars,stars_guess))
-
-
