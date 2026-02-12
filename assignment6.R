@@ -116,13 +116,64 @@ head(QApairs)
 # Connect to the LLM API!
 ############################################################
 
+revs<-read.csv("data/week1_answers.csv")
+
+#source("geminiAPI.R")
+gemini.R::setAPI(gKey)
+
+revs$stars_guess<-NA
+revs$price_guess<-NA
+revs$gender_guess<-NA
 
 
+stars_task<-"I am giving you a restaurant review. 
+  I want you to read it and guess if the writer liked or hated the restaurant.. 
+If they liked it, respond with a '4'. If they hated it, respond with a '2'.
+Only respond with the number 4 or 2, don't write anything else. 
 
-gemini.R::setAPI("AIzaSyA1kcHjek4VXVDJQy_SSE2NZQkG-6rahOc")
+Here is the review:  "
 
-xx<-gemini_chat("who is michael yeomans?",
+
+price_task<-"I am giving you a restaurant review. 
+  I want you to read it and guess if the restaurant is cheap or expensive. 
+If it is cheap, respond with a '1'. If it is expensive, respond with a '2'.
+Only respond with the number 1 or 2, don't write anything else. 
+Here is the review:  "
+
+gender_task<-"I am giving you a restaurant review. 
+  I want you to read it and guess if the writer is male or female. 
+Answer only with the word 'male' or 'female' and nothing else. 
+Here is the review:  "
+
+tpb<-txtProgressBar(1,nrow(revs))
+for(x in 1:nrow(revs)){
+  s_prompt=paste(stars_task,revs[x,]$text)
+  xx<-gemini_chat(s_prompt,
+                  model = "2.0-flash-lite")
+  revs[x,]$stars_guess<-xx$outputs
+  p_prompt=paste(price_task,revs[x,]$text)
+  xx<-gemini_chat(p_prompt,
+                  model = "2.0-flash-lite")
+  revs[x,]$price_guess<-xx$outputs
+
+  g_prompt=paste(gender_task,revs[x,]$text)
+  xx<-gemini_chat(g_prompt,
                 model = "2.0-flash-lite")
+  revs[x,]$gender_guess<-xx$outputs
+   setTxtProgressBar(tpb,x)
+}
 
-xx$outputs
+revs$stars_guess<-gsub("\n","",revs$stars_guess)
+revs$price_guess<-gsub("\n","",revs$price_guess)
+revs$gender_guess<-gsub("\n","",revs$gender_guess)
 
+revs$gender_guess<-1*(revs$gender_guess=="male")
+
+revs %>%
+  with(table(gender,gender_guess))
+
+revs %>%
+  with(table(price,price_guess))
+
+revs %>%
+  with(table(stars,stars_guess))

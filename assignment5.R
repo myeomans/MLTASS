@@ -2,8 +2,12 @@
 #
 # Machine Learning & Text Analysis for Social Science
 #
+<<<<<<< HEAD
 #              Assignment 6
 #
+=======
+#              Assignment 5
+>>>>>>> 5cc40d7463e71194310e083c7eeeee484b2e7d24
 #
 ################################################
 

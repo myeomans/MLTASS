@@ -133,8 +133,10 @@ miss_low<-rev_med_test %>%
   slice(1:10) %>%
   select(text,stars,prediction)
 
-miss_low
 miss_low%>%
+  filter(stars==5)
+miss_low%>%
+  filter(stars==5) %>%
   slice(1:2) %>%
   pull(text)
 miss_high
@@ -443,23 +445,22 @@ plot(rev_topicMod20,type="summary",n = 7,xlim=c(0,.3),labeltype = "frex",
      topic.names = topicNames) 
 
 # You can add names to the vector one at a time
-topicNames[1]="Payment"
-topicNames[9]="Seafood"
-topicNames[13]="Food Quality"
-topicNames[14]="Ramen"
-topicNames[11]="Breakfast"
+topicNames[1]="Asian"
+topicNames[2]="Dessert"
+topicNames[4]="Sandwich"
+topicNames[15]="Seafood"
+
 # We can also grab more words per topic
 labelTopics(rev_topicMod20)
 
 findThoughts(model=rev_topicMod20,
              texts=rev_med_train$text,
-             topics=11,n = 5)
+             topics=2,n = 5)
 
 # We can even put them in a word cloud! If you fancy it
 
-cloud(rev_topicMod20,11)
+cloud(rev_topicMod20,2)
 
-cloud(rev_topicMod20,9)
 
 
 stmeffects<-estimateEffect(1:topicNum~stars,

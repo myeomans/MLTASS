@@ -164,5 +164,4 @@ cos <- function(x,y) sum(x*y)/(sqrt(sum(x^2))*sqrt(sum(y^2)))
 
 #install.packages("PsychWordVec")
 
-
-
+2+2
