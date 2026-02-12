@@ -161,5 +161,7 @@ nrm <- function(x) x/sqrt(sum(x^2))
 #Cosine Similarity#
 cos <- function(x,y) sum(x*y)/(sqrt(sum(x^2))*sqrt(sum(y^2)))
 ################################################
-1
 
+#install.packages("PsychWordVec")
+
+2+2
