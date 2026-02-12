@@ -103,7 +103,7 @@ kendall_acc(ecMain_merged$wordcount_a1,
 ############################################################
 
 QApairs=ecQA %>%
-  filter(callID=="100002") %>%
+  filter(callID=="101111") %>%
   mutate(qnum=question,
          asker=ifelse(asker==1,"question","answer")) %>%
   group_by(callID,qnum,asker) %>%
