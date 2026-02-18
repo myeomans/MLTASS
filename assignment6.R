@@ -149,16 +149,16 @@ Here is the review:  "
 tpb<-txtProgressBar(1,nrow(revs))
 for(x in 1:nrow(revs)){
   s_prompt=paste(stars_task,revs[x,]$text)
-  xx<-gemini_chat(s_prompt,
+  xx<-gemini.R::gemini_chat(s_prompt,
                   model = "2.0-flash-lite")
   revs[x,]$stars_guess<-xx$outputs
   p_prompt=paste(price_task,revs[x,]$text)
-  xx<-gemini_chat(p_prompt,
+  xx<-gemini.R::gemini_chat(p_prompt,
                   model = "2.0-flash-lite")
   revs[x,]$price_guess<-xx$outputs
   
   g_prompt=paste(gender_task,revs[x,]$text)
-  xx<-gemini_chat(g_prompt,
+  xx<-gemini.R::gemini_chat(g_prompt,
                   model = "2.0-flash-lite")
   revs[x,]$gender_guess<-xx$outputs
   setTxtProgressBar(tpb,x)
