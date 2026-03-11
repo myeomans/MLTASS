@@ -1,8 +1,9 @@
 ################################################
 #
-#     Text Mining for Economics & Finance
+# Machine Learning & Text Analysis for Social Science
 #
-#            Assignment 7
+#              Assignment 7
+#
 #
 ################################################
 
@@ -190,6 +191,8 @@ kendall_acc(rests_test$price,
 
 xgbMod <- xgboost(data = rests_train_x, 
                   label = rests_train$price, 
+                    
+                  
                   # max.depth = 4, 
                   # eta = .3, 
                   # nthread = 10, 
@@ -201,31 +204,40 @@ xgb_pred_test<-predict(xgbMod, rests_test_x)
 kendall_acc(rests_test$price,
             xgb_pred_test)
 
+# Setting for boosting a linear model
+# xgbMod <- xgboost(data = rests_train_x[,1:20], 
+#                   label = rests_train$price, 
+#                   booster="gblinear",
+#                   nrounds = 1000, 
+#                   verbose=0)
+
 #######################################################
 # SHAP for xgboost
 #######################################################
-
-xgbMod <- xgboost(data = rests_train_x[,1:20], 
-                  label = rests_train$price, 
-                  # max.depth = 4, 
-                  # eta = .3, 
-                  # nthread = 10, 
-                  nrounds = 1000, 
-                  verbose=0)
-
-# get the values
-shap_values <- shap.values(xgb_model = xgbMod,
-                           X_train = rests_train_x[,1:20])
-shap_values$mean_shap_score
-
-# beeswarm plots
-shap.plot.summary.wrap1(xgbMod, X = rests_train_x[,1:20])
-
-shap_long <- shap.prep(xgb_model = xgbMod, 
-                       X_train = rests_train_x[,1:20])
-
-# deeper plot for single feature - more useful for continuous variables
-shap.plot.dependence(data_long = shap_long, x = "nightlife") 
+# 
+# Doesn't work any more, not sure why.....
+# 
+# xgbMod <- xgboost(data = rests_train_x[,1:10], 
+#                   label = rests_train$price, 
+#                   # max.depth = 4, 
+#                   # eta = .3, 
+#                   # nthread = 10, 
+#                   nrounds = 1000, 
+#                   verbose=0)
+# 
+# # get the values
+# shap_values <- shap.values(xgb_model = xgbMod,
+#                            X_train = rests_train_x[,1:10])
+# shap_values$mean_shap_score
+# 
+# # beeswarm plots
+# shap.plot.summary.wrap1(xgbMod, X = rests_train_x[,1:20])
+# 
+# shap_long <- shap.prep(xgb_model = xgbMod, 
+#                        X_train = rests_train_x[,1:20])
+# 
+# # deeper plot for single feature - more useful for continuous variables
+# shap.plot.dependence(data_long = shap_long, x = "nightlife") 
 
 #######################################################
 # Post-double-LASSO
