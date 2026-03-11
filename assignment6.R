@@ -121,7 +121,7 @@ revs<-read.csv("data/week1_answers.csv")
 
 source("geminiAPI.R")
 gemini.R::setAPI(gKey)
-
+gKey="AIzaSyC9N1-dDm5NWZq68dukPAH5LySm9lFIZRw"
 revs$stars_guess<-NA
 revs$price_guess<-NA
 revs$gender_guess<-NA
@@ -146,7 +146,6 @@ gender_task<-"I am giving you a restaurant review.
 Answer only with the word 'male' or 'female' and nothing else. 
 Here is the review:  "
 
-tpb<-txtProgressBar(1,nrow(revs))
 for(x in 1:nrow(revs)){
   s_prompt=paste(stars_task,revs[x,]$text)
   xx<-gemini.R::gemini_chat(s_prompt,
@@ -158,10 +157,11 @@ for(x in 1:nrow(revs)){
   revs[x,]$price_guess<-xx$outputs
   
   g_prompt=paste(gender_task,revs[x,]$text)
-  xx<-gemini.R::gemini_chat(g_prompt,
+  xx<-gemini.R::gemini_chat(g_prompt,temperature=0,
+                              
                   model = "2.0-flash-lite")
   revs[x,]$gender_guess<-xx$outputs
-  setTxtProgressBar(tpb,x)
+  print(x)
 }
 
 revs$stars_guess<-gsub("\n","",revs$stars_guess)
@@ -182,7 +182,6 @@ revs %>%
 ############################################################
 
 ############################################################
-
 
 
 library(tidyllm)
